@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="google-site-verification" content="HoWofmErOOKMSn8dHeXvBTb5cGoEBEB1rQ7Y3CrUYgY" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>GPA Calculator — Calculate Your GPA &amp; CGPA Online | GPACalcHub</title>
+    <meta name="description" content="Free GPA calculator for students. Add your courses, credits and grades to calculate your semester GPA on the 4.0 scale, or work out your new cumulative GPA (CGPA). Plus guides on GPA scales, what counts as a good GPA, and how to raise yours." />
+    <link rel="canonical" href="https://gpacalchub.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GPACalcHub" />
+    <meta property="og:title" content="GPA Calculator — Calculate Your GPA &amp; CGPA Online | GPACalcHub" />
+    <meta property="og:description" content="Add your courses, credits and grades to calculate your semester GPA on the 4.0 scale, or your new cumulative GPA. Free, instant, no sign-up." />
+    <meta property="og:url" content="https://gpacalchub.github.io/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="GPA Calculator | GPACalcHub" />
+    <meta name="twitter:description" content="Free GPA and CGPA calculator for students, plus plain-English guides to GPA scales and raising your grades." />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "GPACalcHub",
+      "url": "https://gpacalchub.github.io/",
+      "description": "Free GPA and cumulative GPA calculator for students, with guides on GPA scales, good GPAs and how to improve your grades."
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #e8f3fb;
+        --bg-soft: #dceef9;
+        --surface: #ffffff;
+        --ink: #16324a;
+        --ink-soft: #47617a;
+        --accent: #0369a1;
+        --accent-strong: #075985;
+        --accent-soft: #d6ecfa;
+        --line: #bcd9ee;
+        --good: #177245;
+        --warn: #9a6a00;
+        --bad: #b3352c;
+        --radius: 10px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a1d2e;
+          --bg-soft: #0e273d;
+          --surface: #10293f;
+          --ink: #e6f2fa;
+          --ink-soft: #a9c4d8;
+          --accent: #7cc4ec;
+          --accent-strong: #a8d8f5;
+          --accent-soft: #173d59;
+          --line: #2a4d6b;
+          --good: #6fd598;
+          --warn: #e8c268;
+          --bad: #f0928a;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+      }
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: var(--accent-strong); }
+      h1, h2, h3 { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; line-height: 1.2; color: var(--ink); }
+      h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); margin: 0 0 0.6rem; }
+      h2 { font-size: clamp(1.45rem, 3.5vw, 1.9rem); margin: 2.4rem 0 0.7rem; }
+      h3 { font-size: 1.2rem; margin: 1.6rem 0 0.4rem; }
+      p { margin: 0 0 1rem; }
+      ul, ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+      li { margin-bottom: 0.35rem; }
+
+      /* Top navigation */
+      .topbar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        position: sticky; top: 0; z-index: 20;
+      }
+      .topbar-inner {
+        max-width: 1020px; margin: 0 auto; padding: 0.55rem 1rem;
+        display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      }
+      .brand {
+        font-family: "Source Serif 4", Georgia, serif; font-weight: 700; font-size: 1.25rem;
+        color: var(--ink); text-decoration: none; white-space: nowrap;
+      }
+      .brand span { color: var(--accent); }
+      .navlinks { display: flex; flex-wrap: wrap; gap: 0.15rem 1rem; margin-left: auto; }
+      .navlinks a {
+        color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; font-weight: 500;
+        padding: 0.45rem 0.1rem; display: inline-block;
+      }
+      .navlinks a:hover, .navlinks a.active { color: var(--accent); }
+
+      .wrap { max-width: 860px; margin: 0 auto; padding: 1.6rem 1rem 3rem; }
+      .wrap-wide { max-width: 1020px; }
+
+      .page { display: none; }
+      .page.current { display: block; }
+
+      .lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 44rem; }
+      .muted { color: var(--ink-soft); }
+      .small { font-size: 0.9rem; }
+
+      /* Calculator */
+      .tool {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.2rem 1.2rem 1.4rem;
+        margin: 1.4rem 0 0.6rem;
+      }
+      .tool h2 { margin-top: 0; font-size: 1.5rem; }
+      .mode-toggle { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0 1rem; }
+      .mode-toggle button, .grade-toggle button {
+        font: inherit; font-size: 0.95rem; font-weight: 600;
+        background: var(--accent-soft); color: var(--accent-strong);
+        border: 1px solid var(--line); border-radius: 999px;
+        padding: 0.45rem 1rem; cursor: pointer; min-height: 2.5rem;
+      }
+      .mode-toggle button[aria-pressed="true"], .grade-toggle button[aria-pressed="true"] {
+        background: var(--accent); color: #fff; border-color: var(--accent);
+      }
+      @media (prefers-color-scheme: dark) {
+        .mode-toggle button[aria-pressed="true"], .grade-toggle button[aria-pressed="true"] { color: #082a40; }
+      }
+      .grade-toggle { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+      .grade-toggle .lbl { font-size: 0.92rem; color: var(--ink-soft); font-weight: 600; }
+
+      .course-head, .course-row {
+        display: grid;
+        grid-template-columns: 1fr 6.2rem 8.6rem 2.6rem;
+        gap: 0.5rem; align-items: center;
+      }
+      .course-head { font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; padding: 0.4rem 0; }
+      .course-row { padding: 0.3rem 0; }
+      .course-row input, .course-row select {
+        width: 100%; font: inherit; font-size: 0.98rem;
+        padding: 0.5rem 0.6rem; border: 1px solid var(--line); border-radius: 8px;
+        background: var(--bg); color: var(--ink);
+      }
+      .course-row input:focus, .course-row select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .remove-btn {
+        background: none; border: none; color: var(--bad); font-size: 1.35rem; line-height: 1;
+        cursor: pointer; padding: 0.4rem; border-radius: 8px; min-width: 2.6rem; min-height: 2.6rem;
+      }
+      .remove-btn:hover { background: var(--accent-soft); }
+      @media (max-width: 560px) {
+        .course-head { display: none; }
+        .course-row { grid-template-columns: 1fr 4.6rem 6.4rem 2.6rem; gap: 0.4rem; }
+        .course-row input, .course-row select { font-size: 0.92rem; padding: 0.5rem 0.4rem; }
+      }
+      .tool-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+      .btn {
+        font: inherit; font-weight: 600; font-size: 1rem; cursor: pointer;
+        border-radius: 8px; padding: 0.6rem 1.3rem; min-height: 2.75rem;
+        border: 1px solid var(--accent);
+      }
+      .btn-primary { background: var(--accent); color: #fff; }
+      .btn-primary:hover { background: var(--accent-strong); }
+      @media (prefers-color-scheme: dark) { .btn-primary { color: #082a40; } .btn-primary:hover { color: #082a40; } }
+      .btn-ghost { background: transparent; color: var(--accent); }
+      .btn-ghost:hover { background: var(--accent-soft); }
+
+      .cumulative-fields {
+        display: none; gap: 1rem; flex-wrap: wrap;
+        background: var(--bg-soft); border-radius: 8px; padding: 0.9rem 1rem; margin: 0.4rem 0 0.8rem;
+      }
+      .cumulative-fields.show { display: flex; }
+      .cumulative-fields label { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); display: block; }
+      .cumulative-fields input {
+        font: inherit; width: 10rem; max-width: 100%;
+        padding: 0.5rem 0.6rem; border: 1px solid var(--line); border-radius: 8px;
+        background: var(--surface); color: var(--ink); margin-top: 0.25rem;
+      }
+      .result {
+        margin-top: 1.2rem; padding: 1rem 1.1rem;
+        background: var(--accent-soft); border-radius: 8px; display: none;
+      }
+      .result.show { display: block; }
+      .result .gpa-big {
+        font-family: "Source Serif 4", Georgia, serif; font-size: 2.6rem; font-weight: 700; line-height: 1;
+      }
+      .result .gpa-label { font-weight: 600; color: var(--ink-soft); }
+      .result dl { display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; margin: 0.7rem 0 0; }
+      .result dt { font-size: 0.85rem; color: var(--ink-soft); }
+      .result dd { margin: 0; font-weight: 700; }
+      .result .verdict { margin-top: 0.6rem; font-weight: 600; }
+      .tool-error { color: var(--bad); font-weight: 600; margin-top: 0.8rem; display: none; }
+      .tool-error.show { display: block; }
+
+      /* Plain prose sections */
+      .divider { border: none; border-top: 1px solid var(--line); margin: 2.6rem 0 0; }
+      table.scale {
+        border-collapse: collapse; width: 100%; margin: 1rem 0 1.4rem; font-size: 0.97rem;
+        background: var(--surface);
+      }
+      table.scale th, table.scale td { border: 1px solid var(--line); padding: 0.5rem 0.7rem; text-align: left; }
+      table.scale th { background: var(--bg-soft); }
+      .formula {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+        padding: 0.9rem 1.1rem; font-family: "Source Serif 4", Georgia, serif; font-size: 1.08rem;
+        margin: 1rem 0;
+      }
+      .article-list { list-style: none; padding: 0; }
+      .article-list li { margin-bottom: 1.6rem; }
+      .article-list h3 { margin: 0 0 0.25rem; }
+      .article-list h3 a { text-decoration: none; }
+      .article-list h3 a:hover { text-decoration: underline; }
+      .article-list p { margin: 0; color: var(--ink-soft); }
+      .meta-line { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 1.2rem; }
+      blockquote {
+        margin: 1.2rem 0; padding: 0.2rem 0 0.2rem 1rem;
+        border-left: 3px solid var(--accent); color: var(--ink-soft); font-style: italic;
+      }
+      details.faq-item { border-bottom: 1px solid var(--line); padding: 0.7rem 0; }
+      details.faq-item summary { font-weight: 600; cursor: pointer; padding: 0.3rem 0; }
+      details.faq-item p { margin-top: 0.5rem; }
+
+      footer {
+        border-top: 1px solid var(--line); background: var(--surface);
+        margin-top: 3rem;
+      }
+      .footer-inner {
+        max-width: 1020px; margin: 0 auto; padding: 1.6rem 1rem 2rem;
+        display: flex; flex-wrap: wrap; gap: 0.6rem 2.5rem; justify-content: space-between;
+      }
+      .footer-links { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; }
+      .footer-links a { color: var(--ink-soft); text-decoration: none; font-size: 0.93rem; padding: 0.35rem 0; display: inline-block; }
+      .footer-links a:hover { color: var(--accent); text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#/">GPA<span>Calc</span>Hub</a>
+        <nav class="navlinks" aria-label="Main">
+          <a href="#/" data-nav="home">Calculator</a>
+          <a href="#/articles" data-nav="articles">Articles</a>
+          <a href="#/faq" data-nav="faq">FAQ</a>
+          <a href="#/about" data-nav="about">About</a>
+          <a href="#/contact" data-nav="contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ============================= HOME ============================= -->
+    <main class="page" id="page-home">
+      <div class="wrap wrap-wide">
+        <h1>GPA Calculator</h1>
+        <p class="lede">Work out your grade point average in seconds. Add each course you are taking, enter its credit hours and the grade you earned (or expect to earn), and GPACalcHub calculates your GPA on the standard 4.0 scale — no sign-up, no spreadsheets, and nothing leaves your browser.</p>
+
+        <section class="tool" aria-label="GPA calculator">
+          <h2>Calculate your GPA</h2>
+          <p class="muted" style="margin-bottom:0">Choose a mode. <strong>Semester GPA</strong> covers one term on its own. <strong>Cumulative GPA</strong> blends this semester with the GPA and credits you already have, so you can see your new overall average.</p>
+
+          <div class="mode-toggle" role="group" aria-label="Calculator mode">
+            <button type="button" id="mode-semester" aria-pressed="true">Semester GPA</button>
+            <button type="button" id="mode-cumulative" aria-pressed="false">Cumulative GPA (CGPA)</button>
+          </div>
+
+          <div class="cumulative-fields" id="cumulative-fields">
+            <div>
+              <label for="cur-gpa">Your current cumulative GPA</label>
+              <input type="number" id="cur-gpa" min="0" max="4" step="0.01" placeholder="e.g. 3.20" inputmode="decimal" />
+            </div>
+            <div>
+              <label for="cur-credits">Credits completed so far</label>
+              <input type="number" id="cur-credits" min="0" step="0.5" placeholder="e.g. 60" inputmode="decimal" />
+            </div>
+          </div>
+
+          <div class="grade-toggle">
+            <span class="lbl">Enter grades as:</span>
+            <button type="button" id="grade-letters" aria-pressed="true">Letter grades (A, B+, …)</button>
+            <button type="button" id="grade-percent" aria-pressed="false">Percentages (%)</button>
+          </div>
+
+          <div class="course-head" aria-hidden="true">
+            <span>Course name (optional)</span><span>Credits</span><span>Grade</span><span></span>
+          </div>
+          <div id="course-rows"></div>
+
+          <div class="tool-actions">
+            <button type="button" class="btn btn-ghost" id="add-course">+ Add course</button>
+            <button type="button" class="btn btn-primary" id="calc-btn">Calculate GPA</button>
+            <button type="button" class="btn btn-ghost" id="reset-btn">Reset</button>
+          </div>
+
+          <p class="tool-error" id="tool-error" role="alert"></p>
+
+          <div class="result" id="result" aria-live="polite">
+            <span class="gpa-label" id="result-label">Your GPA</span>
+            <div class="gpa-big" id="result-gpa">0.00</div>
+            <dl>
+              <div><dt id="dt-credits">Total credits</dt><dd id="result-credits">0</dd></div>
+              <div><dt>Quality points</dt><dd id="result-points">0.0</dd></div>
+              <div id="result-semester-wrap" style="display:none"><dt>This semester's GPA</dt><dd id="result-semester">0.00</dd></div>
+            </dl>
+            <p class="verdict" id="result-verdict"></p>
+          </div>
+          <p class="small muted" style="margin-top:1rem;margin-bottom:0">Grades convert using the standard unweighted 4.0 scale shown in the <a href="#/article/gpa-scales-explained">GPA scale table</a> below. Your school may round or weight grades differently — see <a href="#/article/how-to-calculate-gpa">how GPA calculation works</a> for the details.</p>
+        </section>
+
+        <h2>How GPA works</h2>
+        <p>Your GPA — grade point average — is a single number that summarises how you performed across all your courses. Every letter grade is worth a set number of <em>grade points</em>: an A is worth 4.0, a B is worth 3.0, a C is worth 2.0, a D is worth 1.0 and an F is worth 0. Plus and minus grades sit in between, so a B+ is worth 3.3 and an A− is worth 3.7. Because courses carry different credit hours, the average is <em>weighted</em>: a grade in a 4-credit course moves your GPA more than the same grade in a 1-credit lab.</p>
+        <p>The maths is simple once you see it written out. For each course, multiply the grade points by the credit hours to get that course's <em>quality points</em>. Add up all the quality points, add up all the credit hours, and divide:</p>
+        <div class="formula">GPA = total quality points ÷ total credit hours</div>
+        <p>Here is a quick example. Suppose you earn an A (4.0) in a 3-credit English course and a B (3.0) in a 3-credit history course. Your quality points are (4.0 × 3) + (3.0 × 3) = 12 + 9 = 21, over 6 total credits, giving a GPA of 21 ÷ 6 = <strong>3.50</strong>. Try it in the calculator above — it should match exactly. Our full walkthrough, <a href="#/article/how-to-calculate-gpa">how to calculate your GPA step by step</a>, covers longer transcripts, repeated courses and pass/fail classes.</p>
+        <p>One important detail: a semester GPA only describes a single term, while your <a href="#/article/gpa-vs-cgpa">cumulative GPA (CGPA)</a> averages every graded term you have completed. Colleges, scholarship committees and employers usually look at the cumulative figure, which is why the calculator above has a dedicated cumulative mode.</p>
+
+        <h2>The 4.0 grade scale at a glance</h2>
+        <p>Most colleges and high schools in the United States convert letter grades to grade points using the scale below. Percentages are included because many courses report a percentage first; the calculator's percentage mode uses these same bands. If your school publishes its own scale, trust theirs — the differences are usually small but real, and our guide to <a href="#/article/gpa-scales-explained">GPA scales explained</a> shows how 4.0, 5.0 and weighted scales compare.</p>
+        <table class="scale">
+          <thead>
+            <tr><th>Letter grade</th><th>Percentage</th><th>Grade points</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A+ / A</td><td>93–100</td><td>4.0</td></tr>
+            <tr><td>A−</td><td>90–92</td><td>3.7</td></tr>
+            <tr><td>B+</td><td>87–89</td><td>3.3</td></tr>
+            <tr><td>B</td><td>83–86</td><td>3.0</td></tr>
+            <tr><td>B−</td><td>80–82</td><td>2.7</td></tr>
+            <tr><td>C+</td><td>77–79</td><td>2.3</td></tr>
+            <tr><td>C</td><td>73–76</td><td>2.0</td></tr>
+            <tr><td>C−</td><td>70–72</td><td>1.7</td></tr>
+            <tr><td>D+</td><td>67–69</td><td>1.3</td></tr>
+            <tr><td>D</td><td>65–66</td><td>1.0</td></tr>
+            <tr><td>F</td><td>Below 65</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+        <p>Notice what the scale rewards: the jump from a B (3.0) to an A (4.0) is a full point, while the jump from a C to a B is also a full point. There are no half-measures at the top of the scale, which is why protecting A and B grades in your high-credit courses matters so much — a theme we return to in <a href="#/article/how-to-improve-gpa">how to improve your GPA</a>.</p>
+
+        <h2>What counts as a good GPA?</h2>
+        <p>It depends on what you are aiming for. A 3.0 (a B average) is the most common benchmark: it keeps you eligible for most scholarships, internships and graduate programmes. A 3.5 and above is generally considered strong, and a 3.7+ puts you in honours territory at many schools. Below 2.0, most colleges place students on academic probation. But context matters — a 3.2 in a demanding engineering programme can be more impressive than a 3.6 in a lighter course load. Our article on <a href="#/article/what-is-a-good-gpa">what a good GPA really is</a> breaks the numbers down by goal: staying eligible, keeping a scholarship, applying to graduate school, or landing a first job.</p>
+
+        <h2>How to raise your GPA</h2>
+        <p>Raising a GPA is a maths problem before it is a motivation problem. Your cumulative average is anchored by every credit you have already completed, so the more credits you carry, the harder each new grade pulls. A first-year student can transform their average in one strong semester; a final-year student with 100 credits banked will see it move by hundredths. That is not a reason to give up — it is a reason to plan. Use the cumulative mode above to test scenarios: enter your current GPA and credits, then experiment with the grades you would need this semester to hit your target.</p>
+        <p>The strategies that actually work are unglamorous: prioritise high-credit courses when you allocate study time, because they carry the most weight; fix the one or two courses dragging your average down rather than spreading effort evenly; retake a failed or very low course if your school replaces the grade; and talk to instructors early, before a bad midterm becomes a bad final grade. We go deeper — including how to recover from a genuinely bad semester — in <a href="#/article/how-to-improve-gpa">how to improve your GPA: practical strategies that work</a>.</p>
+
+        <h2>GPA vs CGPA: what is the difference?</h2>
+        <p>The terms get mixed up constantly. A <strong>semester GPA</strong> (sometimes just called GPA) covers one term. A <strong>cumulative GPA, or CGPA</strong>, covers everything so far — it is the weighted average of all your semester GPAs, weighted by credits. Some schools use "GPA" to mean the cumulative figure and "term GPA" for the single semester, so always check which number a form is asking for. The full explanation, with worked examples of how one bad semester echoes through a CGPA, is in <a href="#/article/gpa-vs-cgpa">GPA vs CGPA: what's the difference?</a></p>
+
+        <h2>Planning ahead: what grades do you need?</h2>
+        <p>The most common question students ask is not "what is my GPA?" but "what do I need from here?" The cumulative calculator answers it by trial: set a target, then adjust this semester's grades until the result reaches it. If the target requires straight As in every course, the honest answer is that it is out of reach this term — and knowing that early lets you set a two-semester plan instead. Remember too that a single semester rarely defines a transcript. Admissions officers and employers both pay attention to trends, and an upward trend tells a story that a flat average cannot.</p>
+
+        <h2>Frequently asked questions</h2>
+        <p><strong>Does an A+ count for more than an A?</strong> On the standard unweighted scale, no — both are worth 4.0. Some high schools award 4.3 for an A+ on a weighted scale, which is covered in our <a href="#/article/gpa-scales-explained">scale guide</a>.</p>
+        <p><strong>Do pass/fail courses affect my GPA?</strong> Usually not. A "pass" typically earns the credits without grade points, so it neither helps nor hurts the average — but a fail in a pass/fail course sometimes <em>does</em> count as an F. Check your school's policy.</p>
+        <p><strong>How many decimal places should I use?</strong> Most transcripts report GPA to two decimal places (for example, 3.47). This calculator rounds the same way.</p>
+        <p>More questions — including how transfer credits, repeated courses and summer classes are treated — are answered on our <a href="#/faq">full FAQ page</a>.</p>
+
+        <h2>Guides and articles</h2>
+        <p>Everything on GPACalcHub is written to be read in a few minutes and used straight away. Start with the calculation walkthrough if the maths is new to you, or jump to the strategy guide if you already know your number and want to move it:</p>
+        <ul>
+          <li><a href="#/article/how-to-calculate-gpa">How to Calculate Your GPA, Step by Step</a> — the formula, quality points, and worked examples from a real-style transcript.</li>
+          <li><a href="#/article/what-is-a-good-gpa">What Is a Good GPA?</a> — honest benchmarks for scholarships, graduate school and employers.</li>
+          <li><a href="#/article/how-to-improve-gpa">How to Improve Your GPA</a> — the strategies that move the number, and the ones that don't.</li>
+          <li><a href="#/article/gpa-scales-explained">GPA Scales Explained</a> — 4.0 vs 5.0, weighted vs unweighted, and converting between systems.</li>
+          <li><a href="#/article/gpa-vs-cgpa">GPA vs CGPA</a> — the difference between a semester average and your cumulative record.</li>
+        </ul>
+        <p>Browse the whole collection on the <a href="#/articles">articles index</a>.</p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLES INDEX ============================= -->
+    <main class="page" id="page-articles">
+      <div class="wrap">
+        <h1>Articles</h1>
+        <p class="lede">Plain-English guides to understanding your GPA — how it is calculated, what the number means, and how to improve it.</p>
+        <ul class="article-list">
+          <li>
+            <h3><a href="#/article/how-to-calculate-gpa">How to Calculate Your GPA, Step by Step</a></h3>
+            <p>The full method: grade points, credit hours, quality points, and a worked example from a five-course semester — plus what to do about pass/fail classes and repeated courses.</p>
+          </li>
+          <li>
+            <h3><a href="#/article/what-is-a-good-gpa">What Is a Good GPA? A Realistic Guide</a></h3>
+            <p>Benchmarks that actually matter — for staying eligible, keeping a scholarship, applying to graduate school, and impressing a first employer — and why context changes the answer.</p>
+          </li>
+          <li>
+            <h3><a href="#/article/how-to-improve-gpa">How to Improve Your GPA: Practical Strategies That Work</a></h3>
+            <p>The maths of recovery, which courses to prioritise, when retaking a class is worth it, and how to rebuild after a bad semester.</p>
+          </li>
+          <li>
+            <h3><a href="#/article/gpa-scales-explained">GPA Scales Explained: 4.0, 5.0, Weighted and Unweighted</a></h3>
+            <p>Why one school's 4.0 is another's 5.0, what "weighted" really means, and how to convert your GPA between systems without fooling yourself.</p>
+          </li>
+          <li>
+            <h3><a href="#/article/gpa-vs-cgpa">GPA vs CGPA: What's the Difference?</a></h3>
+            <p>Semester GPA, cumulative GPA, major GPA — what each number covers, which one colleges and employers ask for, and how one bad term echoes through your record.</p>
+          </li>
+        </ul>
+        <p>Ready to run your own numbers? Head back to the <a href="#/">GPA calculator</a>.</p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLE: HOW TO CALCULATE ============================= -->
+    <main class="page" id="page-article-how-to-calculate-gpa">
+      <div class="wrap">
+        <p class="small muted"><a href="#/articles">← All articles</a></p>
+        <h1>How to Calculate Your GPA, Step by Step</h1>
+        <p class="meta-line">GPACalcHub · A complete walkthrough, from letter grades to your final average</p>
+        <p>Calculating a GPA by hand takes about two minutes once you know the method, and knowing the method matters: it lets you predict your average before grades are posted, check that your transcript is right, and plan what you need next semester. Here is the whole process, with nothing skipped.</p>
+
+        <h2>Step 1: Convert each grade to grade points</h2>
+        <p>Every letter grade maps to a number of grade points on the 4.0 scale. An A is 4.0, A− is 3.7, B+ is 3.3, B is 3.0, B− is 2.7, C+ is 2.3, C is 2.0, C− is 1.7, D+ is 1.3, D is 1.0 and F is 0.0. If your course reports a percentage instead, convert it first using the bands in our <a href="#/article/gpa-scales-explained">GPA scales guide</a> — 93% and above is a 4.0, 90–92% is a 3.7, and so on down the scale.</p>
+
+        <h2>Step 2: Multiply by credit hours to get quality points</h2>
+        <p>Courses are not all equal. A course that meets for four hours a week and carries 4 credits should influence your average more than a 1-credit seminar, and the calculation makes sure it does. For each course, multiply the grade points by the credit hours. The result is called <em>quality points</em>.</p>
+        <div class="formula">Quality points = grade points × credit hours</div>
+
+        <h2>Step 3: Add everything up and divide</h2>
+        <p>Add the quality points from every course, add the credit hours from every course, and divide the first total by the second:</p>
+        <div class="formula">GPA = total quality points ÷ total credit hours</div>
+
+        <h2>A worked example</h2>
+        <p>Say your semester looks like this: English Composition, 3 credits, grade A (4.0). Calculus, 4 credits, grade B+ (3.3). Biology with lab, 4 credits, grade B (3.0). Introduction to Psychology, 3 credits, grade A− (3.7). First-Year Seminar, 1 credit, grade A (4.0).</p>
+        <p>The quality points are: English 4.0 × 3 = 12.0; Calculus 3.3 × 4 = 13.2; Biology 3.0 × 4 = 12.0; Psychology 3.7 × 3 = 11.1; Seminar 4.0 × 1 = 4.0. Total quality points: 52.3. Total credits: 15. GPA = 52.3 ÷ 15 = 3.4866…, which rounds to <strong>3.49</strong>. Enter the same five courses into the <a href="#/">calculator on our homepage</a> and you will get exactly that — it is a good way to confirm you have the method right.</p>
+        <p>Notice the lesson hiding in the example: the B in 4-credit Biology cost more than the A− in 3-credit Psychology gained. When you plan where to spend study time, credit hours are the multiplier on everything.</p>
+
+        <h2>Edge cases worth knowing</h2>
+        <h3>Pass/fail courses</h3>
+        <p>At most schools, a course taken pass/fail is excluded from the GPA entirely when you pass: you earn the credits, but no grade points enter the calculation. A fail, however, is treated as an F (0.0) at many institutions. Because policies differ, treat pass/fail as a shield for a risky elective, not a hiding place for a required course you are likely to fail.</p>
+        <h3>Repeated courses</h3>
+        <p>Schools handle repeats in one of three ways: replace the old grade with the new one, average the two attempts, or count both. Grade replacement is the most generous and makes retaking a failed course one of the fastest ways to lift a GPA — see <a href="#/article/how-to-improve-gpa">our improvement guide</a> for when it is worth doing.</p>
+        <h3>Incomplete and in-progress grades</h3>
+        <p>Courses without a final grade yet simply do not count. When you are forecasting, enter the grade you realistically expect rather than the grade you hope for; a forecast built on straight As tells you nothing useful.</p>
+        <h3>Transfer credits</h3>
+        <p>Credits transferred from another school usually arrive as credits only — the grades stay behind. Your new school's GPA starts fresh from the courses you take there, even though the credits count toward your degree.</p>
+
+        <h2>From semester GPA to cumulative GPA</h2>
+        <p>The same formula scales up. To combine semesters, you do not average the semester GPAs (that would ignore credit differences between terms); you add all quality points ever earned and divide by all credit hours ever attempted. The <a href="#/article/gpa-vs-cgpa">GPA vs CGPA guide</a> explains this in depth, and the calculator's cumulative mode does it automatically: enter your current GPA and completed credits, add this semester's courses, and it blends them correctly.</p>
+        <p><a href="#/">← Back to the GPA calculator</a></p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLE: GOOD GPA ============================= -->
+    <main class="page" id="page-article-what-is-a-good-gpa">
+      <div class="wrap">
+        <p class="small muted"><a href="#/articles">← All articles</a></p>
+        <h1>What Is a Good GPA? A Realistic Guide</h1>
+        <p class="meta-line">GPACalcHub · Benchmarks for eligibility, scholarships, graduate school and employers</p>
+        <p>"Is my GPA good?" is the question every student asks, and the honest answer is: good compared to what, and good enough for what? A 3.0 that keeps a scholarship is a success; a 3.6 that misses a medical school shortlist feels like a failure. This guide replaces the vague answer with the actual thresholds people use.</p>
+
+        <h2>The rough landscape</h2>
+        <p>On the 4.0 scale, a 4.0 is a perfect record of As. A 3.7–3.9 is excellent — honours level at most colleges. A 3.4–3.6 is strong and competitive for most purposes. A 3.0–3.3 is solidly respectable: a B to B+ average. A 2.7–2.9 is below average but recoverable and rarely disqualifying on its own. A 2.0–2.6 is the warning zone, and below 2.0 most colleges impose academic probation, with dismissal a real risk if it continues. The average college GPA in the United States sits around 3.1–3.3, so "average" is higher than many students expect — grade inflation over recent decades is the main reason.</p>
+
+        <h2>Good enough to stay enrolled and eligible</h2>
+        <p>The floor at most colleges is 2.0. Drop below it and you are typically placed on academic probation; financial aid eligibility also commonly requires maintaining at least a 2.0 (alongside completing enough of the credits you attempt). Student-athletes face similar minimums from their athletic associations. If you are near this line, the priority is not excellence — it is stability: fewer risky courses per term, early tutoring, and no pass/fail gambles on required classes. Our <a href="#/article/how-to-improve-gpa">improvement strategies</a> are written with exactly this situation in mind.</p>
+
+        <h2>Good enough for scholarships</h2>
+        <p>Merit scholarships usually start at 3.0, with the more generous awards at 3.5 and above. Renewal conditions matter as much as entry conditions: many scholarships require you to <em>keep</em> a 3.0 or 3.25 every term, and losing one over a 2.98 is a painful and common story. If a scholarship sets your floor, plan your semester with margin — use the <a href="#/">cumulative calculator</a> to see how much slack one bad course would leave you.</p>
+
+        <h2>Good enough for graduate and professional school</h2>
+        <p>Here the bar rises. Competitive master's programmes commonly expect 3.3–3.5 and up; law and medical schools are stricter still, with admitted students at sought-after schools often averaging 3.6–3.8. But admissions committees read transcripts, not just totals: a rising trend, strong grades in the subjects closest to the programme, and a good final-two-years GPA can offset a weak first year. Many applications let you explain context — a semester disrupted by illness or work is understood when the semesters around it are strong.</p>
+
+        <h2>Good enough for employers</h2>
+        <p>Most employers who set a GPA cutoff for new graduates use 3.0. Some competitive firms in finance and consulting screen at 3.3–3.5 for first-round interviews. After your first job, the number fades fast — experience, references and work samples take over, and within a few years almost nobody asks. If your GPA is below a cutoff, leave it off the résumé rather than rounding it up; a discovered exaggeration costs far more than a modest number.</p>
+
+        <h2>Why context changes everything</h2>
+        <p>A GPA is not a pure measure of ability. Grading standards differ between schools and between departments — averages in some engineering and science programmes run half a point lower than in others, and admissions officers know their local landscape. A weighted high-school GPA above 4.0 is not "better than perfect"; it reflects honours and AP bonuses, as explained in <a href="#/article/gpa-scales-explained">our scales guide</a>. Judge your number against the threshold you actually face, keep it moving in the right direction, and remember it is one line of your record — not the whole record.</p>
+        <p><a href="#/">← Check your own GPA with the calculator</a></p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLE: IMPROVE GPA ============================= -->
+    <main class="page" id="page-article-how-to-improve-gpa">
+      <div class="wrap">
+        <p class="small muted"><a href="#/articles">← All articles</a></p>
+        <h1>How to Improve Your GPA: Practical Strategies That Work</h1>
+        <p class="meta-line">GPACalcHub · The maths of recovery, and the habits that actually move the number</p>
+        <p>Advice about raising your GPA tends to split into two useless halves: vague motivation ("just work harder") and panic. What actually helps is understanding the arithmetic first, then aiming your effort where the arithmetic says it counts.</p>
+
+        <h2>First, understand the maths of recovery</h2>
+        <p>Your cumulative GPA is a weighted average of everything you have completed, so its responsiveness depends on how many credits sit behind it. A student with 15 credits and a 2.6 who earns a 3.8 semester jumps to roughly 3.2. A student with 90 credits and a 2.6 who earns the same 3.8 semester moves to about 2.77. Same effort, very different visible result. This is not unfairness; it is what an average is. The practical conclusion: set targets in terms of <em>semester</em> GPA (which you fully control) and let the cumulative number follow. Run your own scenarios with the <a href="#/">cumulative mode of our calculator</a> — seeing the real ceiling for this term stops you chasing an impossible target and burning out.</p>
+
+        <h2>Prioritise by credit weight</h2>
+        <p>When time runs short — and it always does around midterms — allocate study hours by credit value and by how close the grade is to a boundary. Lifting a 4-credit course from B to A adds 4 quality points to your record; lifting a 1-credit course the same way adds 1. Likewise, a course sitting at 89% is one good assignment away from an A− band, while a course at 71% needs a transformation. Work the boundaries of your heavy courses first.</p>
+
+        <h2>Fix the drag, don't polish the strengths</h2>
+        <p>Students naturally study what they enjoy, which usually means polishing A courses that are already As. Your GPA improves fastest at the bottom of your grade list. One F or D in a 3-credit course erases the benefit of several As; identifying your single worst course and getting it to a B− is worth more than nudging two As into A+s that count exactly the same on an unweighted scale. If a course is heading for failure, talk to the instructor and your advisor <em>before</em> the withdrawal deadline — a W on a transcript is almost always better than an F in the average.</p>
+
+        <h2>Retake strategically</h2>
+        <p>If your school replaces grades on retakes, repeating a course you failed or nearly failed is the single most powerful move available: replacing an F (0.0) with a B (3.0) in a 3-credit course adds 9 quality points while adding zero new credits to the denominator. If your school averages attempts instead, the gain is smaller but still real. Check the policy before you pay for the retake — the three common policies are compared in <a href="#/article/how-to-calculate-gpa">our calculation guide</a>.</p>
+
+        <h2>Habits that show up in the grade book</h2>
+        <p>None of this is glamorous, which is precisely why it works. Attend every class — attendance correlates with grades more reliably than almost any study technique, partly because instructors test what they emphasise in the room. Start assignments the week they are set, not the week they are due, so a single bad week cannot cascade. Use office hours early: instructors are far more helpful about a confusing topic in week three than about a failing grade in week thirteen. And sleep — trading sleep for revision the night before an exam reliably lowers performance on exactly the kind of recall and reasoning the exam tests.</p>
+
+        <h2>Recovering from one bad semester</h2>
+        <p>A single disastrous term — illness, family trouble, a job that swallowed your hours — damages the number, but it does not have to define it. The recovery pattern that works: reduce next term's load slightly so every course gets real attention, avoid stacking your hardest required courses into the same term, and document what happened if you will later need to explain the transcript (many graduate applications provide space for exactly this). An upward trend after a bad semester is a story admissions officers and employers respond to; it demonstrates the thing a flat transcript cannot — that you can recover. For the benchmarks you are recovering <em>toward</em>, see <a href="#/article/what-is-a-good-gpa">what a good GPA is</a>.</p>
+
+        <h2>What doesn't work</h2>
+        <p>Overloading on easy electives to pad the average fools no one and delays your required courses into a brutal final year. Cramming everything into finals week cannot move grades that are 70% decided by then. And obsessing over the cumulative figure daily adds stress without information — check it at midterm and at term's end, plan, and then go and do the work.</p>
+        <p><a href="#/">← Model your recovery with the calculator</a></p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLE: SCALES ============================= -->
+    <main class="page" id="page-article-gpa-scales-explained">
+      <div class="wrap">
+        <p class="small muted"><a href="#/articles">← All articles</a></p>
+        <h1>GPA Scales Explained: 4.0, 5.0, Weighted and Unweighted</h1>
+        <p class="meta-line">GPACalcHub · Why GPA numbers are not comparable until you know the scale behind them</p>
+        <p>A GPA is meaningless without its scale. A 3.8 on a 4.0 scale is excellent; a 3.8 on a 5.0 scale is mediocre. Yet students compare numbers across schools constantly, usually wrongly. This guide explains the main systems and how to translate between them honestly.</p>
+
+        <h2>The standard 4.0 unweighted scale</h2>
+        <p>The most common system in US colleges and many high schools. Every A is worth 4.0 regardless of the course's difficulty, Bs are worth 3.0, and plus/minus grades fill the gaps (A− 3.7, B+ 3.3, and so on). The maximum possible GPA is 4.0. "Unweighted" simply means a grade in an advanced course counts the same as the same grade in a standard course. The <a href="#/">calculator on this site</a> uses this scale, as does the conversion table on our homepage.</p>
+
+        <h2>Weighted scales and the 5.0 GPA</h2>
+        <p>Many high schools weight grades to reward harder courses: an A in an honours class might be worth 4.5 and an A in an Advanced Placement (AP) or International Baccalaureate (IB) class worth 5.0, while a regular-class A stays at 4.0. On such a scale the maximum is 5.0 (or higher), and a weighted GPA of 4.4 is possible. Colleges know this and typically recalculate applicants' GPAs on their own unweighted basis for comparison — which is why a weighted number should never be compared directly with an unweighted one.</p>
+
+        <h2>The percentage scale</h2>
+        <p>Some schools and many countries grade in percentages and convert. The standard US conversion bands: 93–100% = 4.0, 90–92% = 3.7, 87–89% = 3.3, 83–86% = 3.0, 80–82% = 2.7, 77–79% = 2.3, 73–76% = 2.0, 70–72% = 1.7, 67–69% = 1.3, 65–66% = 1.0, below 65% = 0.0. Note the quirk: the scale is not linear. Moving from 89% to 90% gains 0.4 grade points, while moving from 94% to 99% gains nothing. Other countries use entirely different bands, so a converted GPA always carries the fingerprints of the system that produced it.</p>
+
+        <h2>Other systems you may meet</h2>
+        <p>The UK classifies degrees (First, Upper Second/2:1, and so on) rather than averaging grade points; a rough equivalence puts a First around a 3.7–4.0 and a 2:1 around 3.0–3.6, but these are approximations, not conversions. Many European universities use the ECTS A–F scale alongside national marks. India's CGPA is commonly reported on a 10-point scale, where a rough US equivalent is obtained by dividing by 9.5 and multiplying by 4 — again, an estimate that institutions treat cautiously. Pakistan, Canada and Australia each have their own percentage-to-GPA conventions, and Canadian schools vary by province and institution. Whenever a conversion matters — for an application, say — use the receiving institution's published table, not a generic one.</p>
+
+        <h2>How to convert without fooling yourself</h2>
+        <p>Convert course by course, never the final average: convert each grade to the target scale first, then take the credit-weighted average, exactly as described in <a href="#/article/how-to-calculate-gpa">our step-by-step guide</a>. Averaging first and converting second produces a different (and usually flattering) number, because the bands are uneven. And always report the scale alongside the number — "3.6 / 4.0" is honest; a bare "3.6" invites misunderstanding. For how the resulting number stacks up, read <a href="#/article/what-is-a-good-gpa">what counts as a good GPA</a>.</p>
+        <p><a href="#/">← Calculate on the standard 4.0 scale</a></p>
+      </div>
+    </main>
+
+    <!-- ============================= ARTICLE: GPA VS CGPA ============================= -->
+    <main class="page" id="page-article-gpa-vs-cgpa">
+      <div class="wrap">
+        <p class="small muted"><a href="#/articles">← All articles</a></p>
+        <h1>GPA vs CGPA: What's the Difference?</h1>
+        <p class="meta-line">GPACalcHub · Semester averages, cumulative averages, and which one people actually ask for</p>
+        <p>Students use "GPA" and "CGPA" interchangeably, and then get confused when a form asks for one and their transcript shows the other. The distinction is simple, but it has real consequences for how you plan and how your record is judged.</p>
+
+        <h2>The short answer</h2>
+        <p>A <strong>semester GPA</strong> (also called term GPA) is your average for one semester or term only. A <strong>cumulative GPA — CGPA</strong> — is your average across every graded semester you have completed, combined. Your CGPA is the number that appears on your official transcript as your overall standing; your semester GPA is a snapshot of one chapter of it.</p>
+
+        <h2>How a CGPA is actually built</h2>
+        <p>A CGPA is not the average of your semester GPAs. It is calculated from raw totals: all quality points you have ever earned, divided by all credit hours you have ever attempted (the formula itself is in <a href="#/article/how-to-calculate-gpa">our calculation walkthrough</a>). The difference shows when semesters carry different loads. Suppose semester one was 12 credits at a 3.0 GPA (36 quality points) and semester two was 18 credits at a 3.6 (64.8 quality points). Averaging the two GPAs gives 3.3, but the true CGPA is (36 + 64.8) ÷ 30 = <strong>3.36</strong> — the heavier semester rightly pulls more weight. The <a href="#/">cumulative mode of our calculator</a> handles this correctly: give it your current CGPA and credits, add the new semester, and it blends by credit weight.</p>
+
+        <h2>Why one bad semester echoes</h2>
+        <p>Because the CGPA accumulates, early semesters never disappear — they dilute. A first semester at 2.0 across 15 credits contributes 30 quality points permanently; even three later semesters at 3.8 cannot fully erase it, though they can lift the average to a respectable level (in that scenario, about 3.35 after 60 total credits). This is why advisors push students to protect their first year, and why the recovery strategies in <a href="#/article/how-to-improve-gpa">our improvement guide</a> emphasise semester targets over cumulative ones: the semester number is the lever, the CGPA is the gauge.</p>
+
+        <h2>The other averages on your transcript</h2>
+        <p>Two relatives are worth knowing. A <strong>major GPA</strong> counts only courses in your major or programme — graduate schools and technical employers often care about this one more than the overall figure, and a student with a 3.1 overall but a 3.6 in-major is in better shape than the headline suggests. A <strong>term or yearly GPA</strong> groups semesters by academic year and is what many scholarship renewals actually check. If a form just says "GPA", it almost always means the cumulative figure unless it specifies a term.</p>
+
+        <h2>Which one do colleges and employers want?</h2>
+        <p>The CGPA, nearly always — it is the stable, comparable number. But readers of transcripts look at the semester pattern too: steady improvement, a single explained dip, or strength in relevant subjects can all outweigh a slightly higher but flat CGPA. Keep both numbers healthy if you can; if you cannot, make the recent semesters the strong ones. For the thresholds each audience uses, see <a href="#/article/what-is-a-good-gpa">what a good GPA looks like</a>.</p>
+        <p><a href="#/">← Work out your CGPA with the calculator</a></p>
+      </div>
+    </main>
+
+    <!-- ============================= FAQ ============================= -->
+    <main class="page" id="page-faq">
+      <div class="wrap">
+        <h1>Frequently Asked Questions</h1>
+        <p class="lede">Quick answers to the questions students ask most about GPA. For the full method, start with <a href="#/article/how-to-calculate-gpa">how to calculate your GPA</a>.</p>
+
+        <details class="faq-item">
+          <summary>How is GPA calculated?</summary>
+          <p>Convert each letter grade to grade points (A = 4.0, B = 3.0, and so on), multiply by the course's credit hours to get quality points, add up all quality points, and divide by total credit hours. The <a href="#/">calculator on our homepage</a> does this instantly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the difference between GPA and CGPA?</summary>
+          <p>A semester GPA covers one term. A cumulative GPA (CGPA) covers all terms combined, weighted by credits. See <a href="#/article/gpa-vs-cgpa">GPA vs CGPA explained</a> for a worked comparison.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does an A+ count as more than 4.0?</summary>
+          <p>Not on the standard unweighted scale — A+ and A are both 4.0. Some high schools use a weighted scale where an A+ in an advanced course can be worth 4.3 or 5.0. See <a href="#/article/gpa-scales-explained">GPA scales explained</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do pass/fail courses count toward GPA?</summary>
+          <p>Usually a pass earns credits without grade points, so it does not change your GPA. A fail in a pass/fail course is counted as an F (0.0) at many schools. Policies vary — check your student handbook.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens to my GPA if I retake a course?</summary>
+          <p>It depends on your school's policy: some replace the original grade, some average both attempts, and some count both. Grade replacement makes retakes the fastest way to repair a GPA.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do transfer credits affect my GPA?</summary>
+          <p>At most institutions, transferred credits count toward your degree but the grades do not transfer — your GPA at the new school is built only from courses taken there.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What GPA do I need to keep my scholarship?</summary>
+          <p>Common renewal thresholds are 3.0 or 3.25, but they are set by each scholarship's terms. Check your award letter, and plan with margin using the cumulative calculator.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I convert a percentage to a GPA?</summary>
+          <p>Use the standard bands: 93–100% = 4.0, 90–92% = 3.7, 87–89% = 3.3, 83–86% = 3.0, 80–82% = 2.7, 77–79% = 2.3, 73–76% = 2.0, 70–72% = 1.7, 67–69% = 1.3, 65–66% = 1.0, below 65% = 0.0. The calculator's percentage mode applies these automatically. Full details are in <a href="#/article/gpa-scales-explained">the scales guide</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is a 3.5 GPA good?</summary>
+          <p>Yes — a 3.5 is a strong average that satisfies most scholarship, internship and graduate-school expectations. Read <a href="#/article/what-is-a-good-gpa">what is a good GPA</a> for benchmarks by goal.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does GPACalcHub store my grades?</summary>
+          <p>No. The calculator runs entirely in your browser; nothing you type is sent to or stored on any server. See our <a href="#/privacy">privacy policy</a>.</p>
+        </details>
+      </div>
+    </main>
+
+    <!-- ============================= ABOUT ============================= -->
+    <main class="page" id="page-about">
+      <div class="wrap">
+        <h1>About GPACalcHub</h1>
+        <p>GPACalcHub is a small, free tool site built for one job: helping students understand their grade point average without wrestling a spreadsheet. The <a href="#/">calculator</a> handles semester GPA and cumulative GPA (CGPA) on the standard 4.0 scale, accepts letter grades or percentages, and runs entirely in your browser — your courses and grades never leave your device.</p>
+        <p>Alongside the tool, we publish short, original guides that answer the questions students actually ask: <a href="#/article/how-to-calculate-gpa">how the calculation works</a>, <a href="#/article/what-is-a-good-gpa">what a good GPA is</a> for different goals, <a href="#/article/gpa-scales-explained">how the various GPA scales compare</a>, and <a href="#/article/how-to-improve-gpa">how to raise a GPA</a> that has slipped. Every article is written for this site; we do not republish content from elsewhere.</p>
+        <p>One honest caveat: grading policies differ between schools. GPACalcHub uses the most widely used unweighted 4.0 conversion, but your institution's official calculation is the one that appears on your transcript. If your number here differs from your school's, trust your school's — and feel free to <a href="#/contact">tell us</a> about the difference so we can explain it better.</p>
+      </div>
+    </main>
+
+    <!-- ============================= CONTACT ============================= -->
+    <main class="page" id="page-contact">
+      <div class="wrap">
+        <h1>Contact</h1>
+        <p>Questions about the calculator, a correction to one of our guides, or a suggestion for a new article? Email us at <a href="mailto:contact@gpacalchub.github.io">contact@gpacalchub.github.io</a> and we will get back to you.</p>
+        <p>A few things that help us help you faster:</p>
+        <ul>
+          <li>If your calculated GPA differs from your school's, tell us your school's grade scale (for example, whether an A+ is worth 4.3) — most differences come down to the scale, as our <a href="#/article/gpa-scales-explained">scales guide</a> explains.</li>
+          <li>Please do not send transcripts or student ID numbers; a list of courses, credits and grades is all we need, and even that is optional.</li>
+          <li>We cannot change, appeal or verify official grades — only your school can do that.</li>
+        </ul>
+      </div>
+    </main>
+
+    <!-- ============================= PRIVACY ============================= -->
+    <main class="page" id="page-privacy">
+      <div class="wrap">
+        <h1>Privacy Policy</h1>
+        <p class="meta-line">Last updated: 2026</p>
+        <p>GPACalcHub is designed to collect as little information as possible.</p>
+        <h2>The calculator</h2>
+        <p>The GPA calculator runs entirely in your web browser. Course names, credits and grades you enter are processed on your device and are never transmitted to us or stored anywhere. When you close or refresh the page, the entries are gone.</p>
+        <h2>What we collect</h2>
+        <p>This site does not require accounts, does not ask for names or student information, and does not sell or share personal data. If you email us, we receive your email address and the contents of your message, which we use only to reply.</p>
+        <h2>Cookies and analytics</h2>
+        <p>The site may use basic, privacy-respecting analytics to understand which pages are useful (for example, total visits to the calculator versus the articles). We do not build advertising profiles from your visits, and we do not use the data you type into the calculator for any purpose — as explained above, we never receive it.</p>
+        <h2>Third-party links</h2>
+        <p>Pages on this site may link to external websites. We are not responsible for the privacy practices of those sites.</p>
+        <h2>Changes</h2>
+        <p>If this policy changes, the updated version will be posted on this page with a revised date. Questions about privacy can be sent via our <a href="#/contact">contact page</a>.</p>
+      </div>
+    </main>
+
+    <!-- ============================= TERMS ============================= -->
+    <main class="page" id="page-terms">
+      <div class="wrap">
+        <h1>Terms of Use</h1>
+        <p class="meta-line">Last updated: 2026</p>
+        <p>By using GPACalcHub you agree to these terms.</p>
+        <h2>The service</h2>
+        <p>GPACalcHub provides a free GPA calculator and educational articles about grade point averages. The service is provided "as is", without warranties of any kind, and may be changed or discontinued at any time.</p>
+        <h2>Accuracy</h2>
+        <p>We work to keep the calculator and guides accurate, but grading scales and policies differ between institutions. Results from this site are estimates for planning purposes. Your school's official transcript calculation always takes precedence over any figure produced here, and we accept no responsibility for decisions made in reliance on an estimate that differs from an official record.</p>
+        <h2>Acceptable use</h2>
+        <p>Use the site for your own academic planning. Do not attempt to disrupt the service, misrepresent results from it as official documents, or reproduce its articles as your own work.</p>
+        <h2>Intellectual property</h2>
+        <p>The text and design of this site belong to GPACalcHub. You may link to any page and quote short excerpts with attribution.</p>
+      </div>
+    </main>
+
+    <!-- ============================= DISCLAIMER ============================= -->
+    <main class="page" id="page-disclaimer">
+      <div class="wrap">
+        <h1>Disclaimer</h1>
+        <p>GPACalcHub is an independent educational tool. It is not affiliated with, endorsed by, or connected to any school, college, university or examination body.</p>
+        <p>The calculator uses the standard unweighted 4.0 grade-point scale. Individual institutions may use different conversions — including weighted scales, A+ values above 4.0, different percentage bands, or their own rules for repeated and transferred courses — and those differences can change the result. Always confirm important figures (scholarship eligibility, academic standing, graduation requirements) against your institution's official records and policies.</p>
+        <p>The articles on this site offer general information and study guidance, not academic advising for any individual's situation. For decisions with serious consequences, speak to your school's academic advising office.</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <p style="margin:0 0 0.3rem"><strong>GPACalcHub</strong> — free GPA &amp; CGPA calculator for students.</p>
+          <p class="muted small" style="margin:0">© 2026 GPACalcHub. All rights reserved.</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#/">Calculator</a>
+          <a href="#/articles">Articles</a>
+          <a href="#/faq">FAQ</a>
+          <a href="#/about">About</a>
+          <a href="#/contact">Contact</a>
+          <a href="#/privacy">Privacy</a>
+          <a href="#/terms">Terms</a>
+          <a href="#/disclaimer">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ---------- Grade data ---------- */
+        var LETTER_POINTS = {
+          "A+": 4.0, "A": 4.0, "A-": 3.7,
+          "B+": 3.3, "B": 3.0, "B-": 2.7,
+          "C+": 2.3, "C": 2.0, "C-": 1.7,
+          "D+": 1.3, "D": 1.0, "D-": 0.7,
+          "F": 0.0
+        };
+        var LETTERS = Object.keys(LETTER_POINTS);
+
+        function percentToPoints(p) {
+          if (p >= 93) return 4.0;
+          if (p >= 90) return 3.7;
+          if (p >= 87) return 3.3;
+          if (p >= 83) return 3.0;
+          if (p >= 80) return 2.7;
+          if (p >= 77) return 2.3;
+          if (p >= 73) return 2.0;
+          if (p >= 70) return 1.7;
+          if (p >= 67) return 1.3;
+          if (p >= 65) return 1.0;
+          return 0.0;
+        }
+
+        /* ---------- State ---------- */
+        var mode = "semester";      // "semester" | "cumulative"
+        var gradeMode = "letters";  // "letters" | "percent"
+
+        var rowsEl = document.getElementById("course-rows");
+        var errorEl = document.getElementById("tool-error");
+        var resultEl = document.getElementById("result");
+
+        /* ---------- Course rows ---------- */
+        function makeGradeControl() {
+          if (gradeMode === "letters") {
+            var sel = document.createElement("select");
+            sel.className = "grade-input";
+            sel.setAttribute("aria-label", "Grade");
+            var blank = document.createElement("option");
+            blank.value = ""; blank.textContent = "Grade…";
+            sel.appendChild(blank);
+            LETTERS.forEach(function (L) {
+              var o = document.createElement("option");
+              o.value = L; o.textContent = L;
+              sel.appendChild(o);
+            });
+            return sel;
+          }
+          var inp = document.createElement("input");
+          inp.type = "number";
+          inp.className = "grade-input";
+          inp.min = "0"; inp.max = "100"; inp.step = "0.1";
+          inp.placeholder = "% e.g. 88";
+          inp.setAttribute("inputmode", "decimal");
+          inp.setAttribute("aria-label", "Grade percentage");
+          return inp;
+        }
+
+        function addRow(name, credits, gradeValue) {
+          var row = document.createElement("div");
+          row.className = "course-row";
+
+          var nameInp = document.createElement("input");
+          nameInp.type = "text";
+          nameInp.className = "course-name";
+          nameInp.placeholder = "Course name";
+          nameInp.setAttribute("aria-label", "Course name");
+          if (name) nameInp.value = name;
+
+          var credInp = document.createElement("input");
+          credInp.type = "number";
+          credInp.className = "course-credits";
+          credInp.min = "0"; credInp.step = "0.5";
+          credInp.placeholder = "Credits";
+          credInp.setAttribute("inputmode", "decimal");
+          credInp.setAttribute("aria-label", "Credits");
+          if (credits) credInp.value = credits;
+
+          var gradeCtl = makeGradeControl();
+          if (gradeValue) gradeCtl.value = gradeValue;
+
+          var rm = document.createElement("button");
+          rm.type = "button";
+          rm.className = "remove-btn";
+          rm.innerHTML = "&times;";
+          rm.setAttribute("aria-label", "Remove course");
+          rm.addEventListener("click", function () {
+            row.remove();
+            calculate();
+          });
+
+          [nameInp, credInp, gradeCtl].forEach(function (el) {
+            el.addEventListener("input", calculate);
+            el.addEventListener("change", calculate);
+          });
+
+          row.appendChild(nameInp);
+          row.appendChild(credInp);
+          row.appendChild(gradeCtl);
+          row.appendChild(rm);
+          rowsEl.appendChild(row);
+          return row;
+        }
+
+        function readRows() {
+          var rows = [];
+          rowsEl.querySelectorAll(".course-row").forEach(function (row) {
+            var creditsRaw = row.querySelector(".course-credits").value;
+            var gradeRaw = row.querySelector(".grade-input").value;
+            rows.push({ creditsRaw: creditsRaw, gradeRaw: gradeRaw });
+          });
+          return rows;
+        }
+
+        /* ---------- Calculation ---------- */
+        function showError(msg) {
+          errorEl.textContent = msg;
+          errorEl.classList.add("show");
+          resultEl.classList.remove("show");
+        }
+        function clearError() {
+          errorEl.textContent = "";
+          errorEl.classList.remove("show");
+        }
+
+        function verdictFor(gpa) {
+          if (gpa >= 3.7) return "Excellent — honours-level average. Keep doing what you are doing.";
+          if (gpa >= 3.4) return "Strong average — competitive for scholarships and graduate programmes.";
+          if (gpa >= 3.0) return "Solid B average — meets the most common scholarship and employer benchmark.";
+          if (gpa >= 2.5) return "Below the 3.0 benchmark — a focused semester can pull this up. See our improvement guide.";
+          if (gpa >= 2.0) return "At the typical minimum for good standing — worth making a recovery plan now.";
+          return "Below 2.0 — most schools treat this as academic-probation territory. Talk to an advisor early.";
+        }
+
+        function calculate() {
+          var rows = readRows();
+          var semPoints = 0, semCredits = 0, filled = 0;
+
+          for (var i = 0; i < rows.length; i++) {
+            var r = rows[i];
+            var hasCredits = r.creditsRaw !== "" && r.creditsRaw !== null;
+            var hasGrade = r.gradeRaw !== "" && r.gradeRaw !== null;
+            if (!hasCredits && !hasGrade) continue; // untouched row
+            if (!hasCredits || !hasGrade) {
+              showError("Each course needs both credits and a grade — or leave the row completely blank.");
+              return;
+            }
+            var credits = parseFloat(r.creditsRaw);
+            if (isNaN(credits) || credits <= 0) {
+              showError("Credit hours must be a number greater than zero.");
+              return;
+            }
+            var pts;
+            if (gradeMode === "letters") {
+              pts = LETTER_POINTS[r.gradeRaw];
+              if (pts === undefined) { showError("Please choose a grade for every course."); return; }
+            } else {
+              var pct = parseFloat(r.gradeRaw);
+              if (isNaN(pct) || pct < 0 || pct > 100) {
+                showError("Percentages must be between 0 and 100.");
+                return;
+              }
+              pts = percentToPoints(pct);
+            }
+            semPoints += pts * credits;
+            semCredits += credits;
+            filled++;
+          }
+
+          if (filled === 0 || semCredits === 0) {
+            clearError();
+            resultEl.classList.remove("show");
+            return;
+          }
+
+          var semGpa = semPoints / semCredits;
+          var finalGpa = semGpa, finalCredits = semCredits, finalPoints = semPoints;
+
+          if (mode === "cumulative") {
+            var curGpa = parseFloat(document.getElementById("cur-gpa").value);
+            var curCredits = parseFloat(document.getElementById("cur-credits").value);
+            if (isNaN(curGpa) || isNaN(curCredits)) {
+              showError("For cumulative mode, enter your current GPA and the credits you have completed so far.");
+              return;
+            }
+            if (curGpa < 0 || curGpa > 4) { showError("Your current GPA must be between 0.0 and 4.0."); return; }
+            if (curCredits < 0) { showError("Completed credits cannot be negative."); return; }
+            finalPoints = curGpa * curCredits + semPoints;
+            finalCredits = curCredits + semCredits;
+            finalGpa = finalCredits > 0 ? finalPoints / finalCredits : 0;
+          }
+
+          clearError();
+          document.getElementById("result-label").textContent =
+            mode === "cumulative" ? "Your new cumulative GPA (CGPA)" : "Your semester GPA";
+          document.getElementById("result-gpa").textContent = finalGpa.toFixed(2);
+          document.getElementById("dt-credits").textContent =
+            mode === "cumulative" ? "Total credits (incl. previous)" : "Total credits";
+          document.getElementById("result-credits").textContent =
+            (Math.round(finalCredits * 10) / 10).toString();
+          document.getElementById("result-points").textContent = finalPoints.toFixed(1);
+          var semWrap = document.getElementById("result-semester-wrap");
+          if (mode === "cumulative") {
+            semWrap.style.display = "";
+            document.getElementById("result-semester").textContent = semGpa.toFixed(2);
+          } else {
+            semWrap.style.display = "none";
+          }
+          document.getElementById("result-verdict").textContent = verdictFor(finalGpa);
+          resultEl.classList.add("show");
+        }
+
+        /* ---------- Mode + grade toggles ---------- */
+        var semBtn = document.getElementById("mode-semester");
+        var cumBtn = document.getElementById("mode-cumulative");
+        var cumFields = document.getElementById("cumulative-fields");
+        function setMode(m) {
+          mode = m;
+          semBtn.setAttribute("aria-pressed", m === "semester" ? "true" : "false");
+          cumBtn.setAttribute("aria-pressed", m === "cumulative" ? "true" : "false");
+          cumFields.classList.toggle("show", m === "cumulative");
+          calculate();
+        }
+        semBtn.addEventListener("click", function () { setMode("semester"); });
+        cumBtn.addEventListener("click", function () { setMode("cumulative"); });
+        document.getElementById("cur-gpa").addEventListener("input", calculate);
+        document.getElementById("cur-credits").addEventListener("input", calculate);
+
+        var lettersBtn = document.getElementById("grade-letters");
+        var percentBtn = document.getElementById("grade-percent");
+        function setGradeMode(gm) {
+          if (gm === gradeMode) return;
+          // Preserve credits/names; grades do not translate between modes, so clear them.
+          var existing = [];
+          rowsEl.querySelectorAll(".course-row").forEach(function (row) {
+            existing.push({
+              name: row.querySelector(".course-name").value,
+              credits: row.querySelector(".course-credits").value
+            });
+          });
+          gradeMode = gm;
+          lettersBtn.setAttribute("aria-pressed", gm === "letters" ? "true" : "false");
+          percentBtn.setAttribute("aria-pressed", gm === "percent" ? "true" : "false");
+          rowsEl.innerHTML = "";
+          if (existing.length === 0) { addRow(); addRow(); addRow(); }
+          existing.forEach(function (e) { addRow(e.name, e.credits, ""); });
+          calculate();
+        }
+        lettersBtn.addEventListener("click", function () { setGradeMode("letters"); });
+        percentBtn.addEventListener("click", function () { setGradeMode("percent"); });
+
+        document.getElementById("add-course").addEventListener("click", function () {
+          var row = addRow();
+          var inp = row.querySelector(".course-name");
+          if (inp) inp.focus();
+        });
+        document.getElementById("calc-btn").addEventListener("click", calculate);
+        document.getElementById("reset-btn").addEventListener("click", function () {
+          rowsEl.innerHTML = "";
+          addRow(); addRow(); addRow();
+          document.getElementById("cur-gpa").value = "";
+          document.getElementById("cur-credits").value = "";
+          clearError();
+          resultEl.classList.remove("show");
+        });
+
+        // Starter rows, including the worked example from the guide (A x 3cr + B x 3cr = 3.50)
+        addRow("", "3", "A");
+        addRow("", "3", "B");
+        addRow();
+        calculate();
+
+        /* ---------- Hash routing ---------- */
+        var routes = {
+          "/": "page-home",
+          "/articles": "page-articles",
+          "/faq": "page-faq",
+          "/about": "page-about",
+          "/contact": "page-contact",
+          "/privacy": "page-privacy",
+          "/terms": "page-terms",
+          "/disclaimer": "page-disclaimer"
+        };
+        var titles = {
+          "/": "GPA Calculator — Calculate Your GPA & CGPA Online | GPACalcHub",
+          "/articles": "Articles | GPACalcHub",
+          "/faq": "FAQ | GPACalcHub",
+          "/about": "About | GPACalcHub",
+          "/contact": "Contact | GPACalcHub",
+          "/privacy": "Privacy Policy | GPACalcHub",
+          "/terms": "Terms of Use | GPACalcHub",
+          "/disclaimer": "Disclaimer | GPACalcHub"
+        };
+
+        function route() {
+          var hash = window.location.hash || "#/";
+          var path = hash.replace(/^#/, "");
+          if (path === "") path = "/";
+          var pageId = routes[path];
+          var navKey = null;
+          if (!pageId && path.indexOf("/article/") === 0) {
+            var slug = path.slice("/article/".length);
+            var candidate = document.getElementById("page-article-" + slug);
+            if (candidate) { pageId = candidate.id; navKey = "articles"; }
+          }
+          if (!pageId) { pageId = "page-home"; path = "/"; }
+          document.querySelectorAll(".page").forEach(function (p) {
+            p.classList.toggle("current", p.id === pageId);
+          });
+          if (titles[path]) document.title = titles[path];
+          if (navKey === null) {
+            navKey = path === "/" ? "home" :
+              path === "/articles" ? "articles" :
+              path === "/faq" ? "faq" :
+              path === "/about" ? "about" :
+              path === "/contact" ? "contact" : "";
+          }
+          document.querySelectorAll("[data-nav]").forEach(function (a) {
+            a.classList.toggle("active", a.getAttribute("data-nav") === navKey);
+          });
+          window.scrollTo(0, 0);
+        }
+        window.addEventListener("hashchange", route);
+        route();
+      })();
+    </script>
+  </body>
+</html>
